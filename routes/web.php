@@ -31,6 +31,8 @@ Route::post('/becomeAdvertiser', [AdvertiserConctroller::class, 'become'])->name
 Route::post('/advertiser/addOffer', [AdvertiserConctroller::class, 'addOffer'])->name('advertiser.addOffer');
 //manager offers
 Route::get('/advertiser/managerOffers', [AdvertiserConctroller::class, 'manageOffers'])->name('advertiser.manageOffers');
+//show an offer
+Route::get('/advertiser/showOffer/{id}', [AdvertiserConctroller::class, 'showOffer'])->name('advertiser.showOffer');
 //update an offer
 Route::post('/advertiser/updateOffer', [AdvertiserConctroller::class], 'updateOffer')->name('advertiser.updateOffer');
 //delete an offer

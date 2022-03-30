@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('advertiser_id')->constrained();
             $table->foreignId('template_id')->constrained();
             $table->boolean('is_verified')->default(0);
+            $table->boolean('is_active')->default(0);
 
             $table->bigInteger('tickets_left');
 

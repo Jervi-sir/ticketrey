@@ -7,6 +7,7 @@ use App\Models\Offer;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdvertiserConctroller extends Controller
@@ -56,6 +57,14 @@ class AdvertiserConctroller extends Controller
 
     public function manageOffers() {
 
+    }
+
+    public function showOffer($id) {
+        $advertiser = Auth()->user;
+        $offers = $advertiser->offers();
+        $offer = $offers->find($id);
+
+        return $offer;
     }
 
     public function updateOffer(Request $request) {
