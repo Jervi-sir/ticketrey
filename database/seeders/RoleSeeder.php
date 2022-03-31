@@ -23,7 +23,7 @@ class RoleSeeder extends Seeder
             'name' => 'advertiser',
         ]);
         DB::table('roles')->insert([
-            'name' => 'user',
+            'name' => 'client',
         ]);
 
     }
