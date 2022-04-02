@@ -2,7 +2,7 @@
 [x] breeze
 [x] faker fill Database
 
-[] setup middleware
+[] setup middleware for role and for is verified advertiser
 
 [] verify advertiser
 [] add a template
