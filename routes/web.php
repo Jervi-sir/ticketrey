@@ -3,6 +3,7 @@
 use App\Models\Advertiser;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\AdvertiserController;
 
@@ -46,6 +47,20 @@ Route::get('/getThisTicket/{qrcode}', [UserController::class, 'getThisTicket'])-
 Route::post('/refund&={offer_id}', [UserController::class, 'refund'])->name('user.refund');
 //TODO: change below to post
 Route::get('/purchase&={offer_id}', [UserController::class, 'purchase'])->name('user.purchase');
+
+//------------------ Admin ------------------//
+Route::get('admin/addTemplate', [AdminController::class, 'addTemplatePage'])->name('admin.addTemplatePage');
+Route::post('admin/addTemplate', [AdminController::class, 'addTemplate'])->name('admin.addTemplate');
+
+Route::get('admin/adv/nonVerified', [AdminController::class, 'listNonVerifiedAdv'])->name('admin.nonVerifiedAdv');
+Route::get('admin/adv/show/{id}', [AdminController::class, 'showAdv'])->name('admin.showAdv');
+Route::post('admin/adv/confirm/{id}', [AdminController::class, 'confirmAdv'])->name('admin.confirmAdv');
+
+Route::get('admin/offer/nonVerifiedOffers', [AdminController::class, 'listNonVerifiedOffer'])->name('admin.nonVerifiedOffer');
+Route::get('admin/offer/show/{id}', [AdminController::class, 'showOffer'])->name('admin.showOffer');
+Route::post('admin/offer/confirm/{id}', [AdminController::class, 'confirmOffer'])->name('admin.confirmOffer');
+
+
 
 
 require __DIR__.'/auth.php';

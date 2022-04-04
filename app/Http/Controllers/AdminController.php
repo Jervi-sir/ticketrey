@@ -2,81 +2,79 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Offer;
+use App\Models\Template;
+use App\Models\Advertiser;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function addTemplatePage()
     {
-        //
+        return view('test.admin.addTemplate');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function addTemplate(Request $request)
     {
-        //
+        $template = new Template();
+        $template->template_name = $request->template_name;
+        $template->type = $request->type;
+        $template->source_code = $request->source_code;
+        $template->save();
+        dd($template);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function listNonVerifiedAdv()
     {
-        //
+        $advs = Advertiser::where('is_verified', 0)->get();
+        dd($advs);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function showAdv($id)
     {
-        //
+        $adv = Advertiser::find($id);
+
+        return view('test.admin.showAdvertiser',['adv' => $adv]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function confirmAdv($id)
     {
-        //
+        $adv = Advertiser::find($id);
+        $adv->is_verified = 1;
+        $adv->save();
+
+        dd($adv);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function listNonVerifiedOffer()
     {
-        //
+        $offers = Offer::where('is_verified', 0)->get();
+        dd($offers);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function showOffer($id)
+    {
+        $offer = Offer::find($id);
+
+        return view('test.admin.showOffer',['offer' => $offer]);
+    }
+
+
+    public function confirmOffer($id)
+    {
+        $offer = Offer::find($id);
+        $offer->is_verified = 1;
+        $offer->save();
+
+        dd($offer);
+
+    }
+
     public function destroy($id)
     {
         //
