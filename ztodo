@@ -1,0 +1,24 @@
+[x] Database migration
+[x] breeze
+[x] faker fill Database
+
+[] setup middleware for role and for is verified advertiser
+
+[] verify advertiser
+[] add a template
+[] add category of templates
+[] advertiser submits an verify request
+
+[x] become an advertiser
+[x] advertiser add an offer
+[x] advertiser see their states
+[x] advertiser manage offers
+[] advertiser delete if no has purchased already
+
+[x] add user
+[x] user search for offer
+[] user purchage a ticket
+[] user refunds his ticket
+[] user see his tickets (dead and new)
+
+[] home show new offers
