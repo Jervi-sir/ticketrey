@@ -3,17 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
+use App\Models\Search;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
 {
-    public function search($keyword)
+    /*--------------------------------------------------------
+    |   Search
+    ----------------------------------------------------------*/
+    public function search(Request $request)
     {
-        $result = $keyword;
+        $keyword = $request->keyword;
+        $search = Search::where('company_name' , 'like', '%' . $keyword . '%')
+                        ->orWhere('campaign_name', 'like', '%' . $keyword . '%')
+                        ->orWhere('details', 'like', '%' . $keyword . '%')
+                        ->orWhere('advertiser_details', 'like', '%' . $keyword . '%')
+                        ->orWhere('location', 'like', '%' . $keyword . '%')
+                        ->orWhere('price', 'like', '%' . $keyword . '%')
+                        ->get();
 
+        dd($search);
         return view('result');
     }
-
     public function index()
     {
         $offers = Offer::where('is_active', 1)->get();
@@ -21,12 +32,10 @@ class OfferController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+    /*--------------------------------------------------------
+    |   show a single offer
+    ----------------------------------------------------------*/
     public function showOffer($id)
     {
         $offer = Offer::find($id);
@@ -34,50 +43,5 @@ class OfferController extends Controller
         return view('tailwind.showOffer', ['offer' => $offer]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

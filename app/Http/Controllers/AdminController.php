@@ -10,11 +10,20 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
 
+    /*--------------------------------------------------------
+    |   templates
+    ----------------------------------------------------------*/
+    /**
+     * Open Page to add template.
+     */
     public function addTemplatePage()
     {
         return view('tailwind.admin.addTemplate');
     }
 
+    /**
+     * save added template.
+     */
     public function addTemplate(Request $request)
     {
         $template = new Template();
@@ -26,18 +35,30 @@ class AdminController extends Controller
 
     }
 
+    /*--------------------------------------------------------
+    |   Adfertisers
+    ----------------------------------------------------------*/
+    /**
+     * get list of Not Verified Advertisers.
+     */
     public function listNonVerifiedAdv()
     {
         $advs = Advertiser::where('is_verified', 0)->get();
         return view('tailwind.admin.advertisers.nonVerifiedAdvertisers', ['advs' => $advs]);
     }
 
+    /**
+     * get list of All Advertisers verified or not.
+     */
     public function allAdv() {
         $advs = Advertiser::all();
 
         return view('tailwind.admin.advertisers.allAdvs', ['advs' => $advs]);
     }
 
+    /**
+     * open edit advertiser page.
+     */
     public function editAdv($id)
     {
         $adv = Advertiser::find($id);
@@ -46,6 +67,9 @@ class AdminController extends Controller
     }
 
 
+    /**
+     * confirm advertiser.
+     */
     public function confirmAdv($id)
     {
         $adv = Advertiser::find($id);
@@ -55,6 +79,9 @@ class AdminController extends Controller
         return back();
     }
 
+    /**
+     * unconfirm advertiser.
+     */
     public function unconfirmAdv($id)
     {
         $adv = Advertiser::find($id);
@@ -65,6 +92,12 @@ class AdminController extends Controller
     }
 
 
+    /*--------------------------------------------------------
+    |   OFFERS
+    ----------------------------------------------------------*/
+    /**
+     * get list of Not Verified offers.
+     */
     public function listNonVerifiedOffer()
     {
         $offers = Offer::where('is_verified', 0)->get();
@@ -72,6 +105,9 @@ class AdminController extends Controller
 
     }
 
+    /**
+     * get list of all offers.
+     */
     public function allOffers()
     {
         $offers = Offer::all();
@@ -79,9 +115,9 @@ class AdminController extends Controller
         return view('tailwind.admin.offers.allOffers',['offers' => $offers]);
     }
 
-
-
-
+    /**
+     * confirm offer.
+     */
     public function confirmOffer($id)
     {
         $offer = Offer::find($id);
@@ -91,6 +127,9 @@ class AdminController extends Controller
         return back();
     }
 
+    /**
+     * show offer.
+     */
     public function showOffer($id)
     {
         $offer = Offer::find($id);

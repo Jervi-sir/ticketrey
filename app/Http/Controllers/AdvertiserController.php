@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Offer;
 use App\Models\Template;
 use App\Models\Advertiser;
+use App\Models\Search;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,9 @@ use App\Providers\RouteServiceProvider;
 
 class AdvertiserController extends Controller
 {
-
+    /*--------------------------------------------------------
+    |  add a fresh client
+    ----------------------------------------------------------*/
     public function joinAdvertiserPage()
     {
         //TODO: if already requests
@@ -47,19 +50,21 @@ class AdvertiserController extends Controller
 
     }
 
-
+    /*--------------------------------------------------------
+    |   Add Offer
+    ----------------------------------------------------------*/
     public function addOfferPage()
     {
         $templates = Template::all();
         return view('tailwind.advertiser.addOffer', ['templates' => $templates]);
     }
 
-
     public function addOffer(Request $request)
     {
+        $advertiser = Auth::user()->advertiser;
 
         $offer = new Offer();
-        $offer->advertiser_id = Auth::user()->advertiser()->first()->id;
+        $offer->advertiser_id = $advertiser->id;
         //TODO: set template id
         $offer->template_id = Template::find($request->type)->id;
         $offer->tickets_left = intval($request->tickets_left);
@@ -70,17 +75,35 @@ class AdvertiserController extends Controller
         $offer->campaign_ends = $request->campaign_ends;
         $offer->save();
 
+        $search = new Search();
+        $search->advertiser_id = $advertiser->id;
+        $search->offer_id = $offer->id;
+
+        $search->company_name = $advertiser->company_name;
+        $search->campaign_name = $offer->campaign_name;
+        //$search->is_active = $offer->id;
+        $search->details = $offer->details;
+        $search->advertiser_details = $advertiser->details;
+        $search->location = 'location';
+        $search->price = 'price';
+        $search->save();
+
         dd($offer);
     }
 
 
+    /*--------------------------------------------------------
+    |   get list of all offers
+    ----------------------------------------------------------*/
     public function manageOffers()
     {
-        $offers = Auth::user()->advertiser->offers()->get();
+        $offers = Auth::user()->advertiser->offers;
         return view('tailwind.advertiser.allOffers', ['offers' => $offers]);
     }
 
-
+    /*--------------------------------------------------------
+    |   show an offer
+    ----------------------------------------------------------*/
     public function showOffer($id)
     {
         $advertiser = Auth::user()->advertiser;
@@ -92,7 +115,9 @@ class AdvertiserController extends Controller
 
     }
 
-
+    /*--------------------------------------------------------
+    |   edit Offer
+    ----------------------------------------------------------*/
     public function editOffer($id)
     {
         $offer = Offer::find($id);

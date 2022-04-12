@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    /*--------------------------------------------------------
+    |   become an advertiser
+    ----------------------------------------------------------*/
     public function upgradePage()
     {
         return view('tailwind.user.upgrade');
@@ -36,12 +39,10 @@ class UserController extends Controller
 
     }
 
-    public function store(Request $request)
-    {
-        return view('test.user.allTickets');
 
-    }
-
+    /*--------------------------------------------------------
+    |   get list of all my tickets
+    ----------------------------------------------------------*/
     public function allMyTickets()
     {
         $user = Auth::user();
@@ -50,6 +51,10 @@ class UserController extends Controller
         return view('tailwind.user.myTickets', ['tickets' => $tickets]);
     }
 
+
+    /*--------------------------------------------------------
+    |   get my selected ticket
+    ----------------------------------------------------------*/
     public function getThisTicket($qrcode)
     {
         //TODO: generate whole ticket in server
@@ -70,6 +75,10 @@ class UserController extends Controller
         //
     }
 
+
+    /*--------------------------------------------------------
+    |   generate my ticket
+    ----------------------------------------------------------*/
     public function purchase($offer_id)
     {
         $offer = Offer::find($offer_id);

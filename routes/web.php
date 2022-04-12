@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/', [OfferController::class, 'index'])->name('home');                                                                   //[done]
 Route::get('show/{id}', [OfferController::class, 'showOffer'])->name('showOffer');                                                  //[done]
-Route::get('search&={keyword}', [OfferController::class, 'search'])->name('search');                                                //[]
+Route::get('search&=', [OfferController::class, 'search'])->name('search');                                                //[]
 
 Route::get('/joinAdv', [AdvertiserController::class, 'joinAdvertiserPage'])->name('get.advertiser.join');                           //[done]
 Route::post('/joinAdv', [AdvertiserController::class, 'joinAdvertiser'])->name('post.advertiser.join');                             //[done]
