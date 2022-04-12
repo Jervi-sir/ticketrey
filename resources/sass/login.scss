@@ -1,0 +1,81 @@
+html, body {
+    margin: 0;
+    background: var(--color-secondary);
+    height: 100%;
+}
+
+.body-login {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 70%;
+
+}
+
+form {
+    font-family: var(--font-primary);
+    padding: var(--padding-body);
+    h1 {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 50px;
+        font-size: var(--sz-big);
+        color: var(--color-white);
+    }
+
+    .row {
+        display: flex;
+        align-items: flex-start;
+        align-content: center;
+        border-bottom: 0.5px solid var(--color-lighter);
+        font-size: var(--sz-under-medium);
+        margin-top: 40px;
+        padding-bottom: 5px;
+        label {
+            width: 30px;
+        }
+
+        input {
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: var(--sz-small);
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    .forgot-password {
+        display: flex;
+        flex-direction: row-reverse;
+        margin-top: 20px;
+        a {
+            text-decoration: none;
+            color: var(--color-white);
+            font-size: var(--sz-small);
+        }
+    }
+
+    button {
+        background: var(--color-white);
+        border-radius: var(--border-radius-normal);
+        width: 100%;
+        padding: 10px;
+        margin-top: 40px;
+        font-size: var(--sz-under-medium);
+    }
+}
+
+.register  {
+    width: 100%;
+    height: 30%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    a {
+        text-decoration: none;
+        font-family: var(--font-primary);
+        color: var(--color-white);
+        font-size: var(--sz-small);
+
+    }
+}

@@ -1,0 +1,260 @@
+.body-top {
+  background: linear-gradient(180deg, #181E27 0%, rgba(32, 37, 46, 0.96748) 70%, rgba(255, 255, 255, 0) 70%);
+}
+
+/* ------------------------------------
+            Header
+------------------------------------*/
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--padding-body);
+  padding-top: var(--padding-body);
+}
+
+/* ------------------------------------
+            Search
+------------------------------------*/
+.search {
+  padding: 0 var(--padding-body);
+}
+.search h1 {
+  font-family: var(--font-primary);
+  color: var(--color-white);
+  font-size: var(--sz-big);
+}
+.search form {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: var(--border-radius-normal);
+  display: flex;
+  align-self: center;
+  padding: 7px 0;
+  margin: auto;
+}
+.search form input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-primary);
+  font-size: var(--sz-small);
+}
+.search form input::-moz-placeholder {
+  color: var(--color-white);
+  font-size: var(--sz-small);
+}
+.search form input:-ms-input-placeholder {
+  color: var(--color-white);
+  font-size: var(--sz-small);
+}
+.search form input::placeholder {
+  color: var(--color-white);
+  font-size: var(--sz-small);
+}
+.search button {
+  background: transparent;
+  border: none;
+}
+.search button img {
+  display: flex;
+  align-items: center;
+}
+
+/* ------------------------------------
+            Popular events
+------------------------------------*/
+.popular-events {
+  /*----- card -----*/
+}
+.popular-events .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--padding-body);
+}
+.popular-events .header h4 {
+  font-family: var(--font-primary);
+  color: var(--color-white);
+  font-size: var(--sz-under-medium);
+}
+.popular-events .header a {
+  text-decoration: none;
+  font-family: var(--font-primary);
+  color: var(--color-white);
+  font-size: calc(var(--sz-small) - 2px);
+}
+.popular-events .card-horizental-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /*width: 200%;*/
+  overflow: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+.popular-events .card {
+  background: var(--color-true-white);
+  width: var(--card-width);
+  border-radius: var(--border-radius-normal);
+  padding: 10px;
+  margin: 0 20px;
+}
+.popular-events .card .image {
+  width: 100%;
+  border-radius: var(--border-radius-normal);
+  overflow: hidden;
+  position: relative;
+}
+.popular-events .card .image img.preview {
+  width: 100%;
+  background-color: #C4C4C4;
+}
+.popular-events .card .image .bookmark {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.popular-events .card .image .date {
+  background-color: var(--color-secondary);
+  border-radius: var(--border-radius-round);
+  color: var(--color-white);
+  text-align: center;
+  font-family: var(--font-primary);
+  font-size: var(--sz-extra-small);
+  border: 3px solid var(--color-white);
+  padding: 4px 20px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.popular-events .card .details .row {
+  display: flex;
+  overflow: auto;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.popular-events .card .details .row .titles {
+  display: flex;
+  flex-direction: column;
+}
+.popular-events .card .details .row .titles .title {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--sz-small);
+}
+.popular-events .card .details .row .titles .promoter {
+  font-size: calc(var(--sz-extra-small) - 2px);
+  color: var(--color-lighter);
+  padding-left: 10px;
+}
+.popular-events .card .details .row .duration span {
+  font-size: var(--sz-extra-small);
+  color: var(--color-lighter);
+}
+.popular-events .card .details .row .location {
+  display: flex;
+  align-items: center;
+}
+.popular-events .card .details .row .location img {
+  width: 8px;
+}
+.popular-events .card .details .row .location span {
+  font-family: var(--font-primary);
+  color: var(--color-black);
+  font-size: var(--sz-extra-small);
+  padding-left: 5px;
+  font-weight: 300;
+}
+.popular-events .card .details .row .price span {
+  font-family: var(--font-primary);
+  color: var(--color-black);
+  font-size: var(--sz-extra-small);
+}
+
+/* ------------------------------------
+            Categories
+------------------------------------*/
+.event-categories .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--padding-body);
+}
+.event-categories .header h4 {
+  font-family: var(--font-primary);
+  color: var(--color-black);
+  font-size: var(--sz-under-medium);
+}
+.event-categories .header a {
+  text-decoration: none;
+  font-family: var(--font-primary);
+  color: var(--color-black);
+  font-size: calc(var(--sz-small) - 2px);
+}
+.event-categories .category-horizental-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /*width: 200%;*/
+  overflow: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+.event-categories .category {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-true-white);
+  text-decoration: none;
+  color: var(--color-black);
+  font-family: var(--font-primary);
+  font-size: var(--sz-extra-small);
+  padding: 0 15px;
+  margin: 0 20px;
+}
+.event-categories .category span {
+  padding-left: 5px;
+}
+
+/* ------------------------------------
+            Join us
+------------------------------------*/
+.join {
+  text-align: center;
+  font-family: var(--font-primary);
+  margin-top: 40px;
+}
+.join .option h2 {
+  font-size: var(--sz-big);
+  color: var(--color-black);
+  margin: 0;
+  padding: 0;
+}
+.join .option h4 {
+  font-weight: 400;
+  color: var(--color-lighter);
+  margin: 0;
+  padding: 0;
+}
+.join .option .join-button {
+  background-color: var(--color-secondary);
+  font-weight: 500;
+  font-family: var(--font-primary);
+  text-decoration: none;
+  color: var(--color-white);
+  flex: 1;
+  border-radius: var(--border-radius-normal);
+  margin: 0 var(--padding-body);
+  margin-top: 7px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+}
+.join .option h5 {
+  font-weight: 400;
+  font-size: var(--sz-small);
+  color: var(--color-lighter);
+}
+.join .option h5 strong {
+  color: var(--color-green);
+}

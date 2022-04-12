@@ -26,6 +26,9 @@ return new class extends Migration
             $table->date('campaign_starts');
             $table->date('campaign_ends');
             $table->timestamps();
+
+            //TODO:add total tickets
+            //TODO:add price
         });
     }
 

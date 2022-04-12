@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Offer;
+use App\Models\Template;
 use App\Models\Advertiser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 
 class AdvertiserController extends Controller
 {
 
     public function joinAdvertiserPage()
     {
-        return view('test.advertiser.join');
+        //TODO: if already requests
+        return view('tailwind.advertiser.join');
     }
 
     //? joined as a new one
@@ -36,14 +40,18 @@ class AdvertiserController extends Controller
         //TODO: $adv->images = $request->images;
         $adv->save();
 
-        dd($user, $adv);
+        event(new Registered($user));
+
+        Auth::login($user);
+        return redirect(RouteServiceProvider::HOME);
 
     }
 
 
     public function addOfferPage()
     {
-        return view('test.advertiser.addOffer');
+        $templates = Template::all();
+        return view('tailwind.advertiser.addOffer', ['templates' => $templates]);
     }
 
 
@@ -53,8 +61,8 @@ class AdvertiserController extends Controller
         $offer = new Offer();
         $offer->advertiser_id = Auth::user()->advertiser()->first()->id;
         //TODO: set template id
-        $offer->template_id = 1;
-        $offer->tickets_left = $request->tickets_left;
+        $offer->template_id = Template::find($request->type)->id;
+        $offer->tickets_left = intval($request->tickets_left);
         $offer->images = '$request->images';
         $offer->details = $request->details;
         $offer->campaign_name = $request->campaign_name;
@@ -68,15 +76,14 @@ class AdvertiserController extends Controller
 
     public function manageOffers()
     {
-        $offers = Auth::user()->advertiser()->first()->offers()->get();
-        dd($offers);
-        return view('test.advertiser.allOffers');
+        $offers = Auth::user()->advertiser->offers()->get();
+        return view('tailwind.advertiser.allOffers', ['offers' => $offers]);
     }
 
 
     public function showOffer($id)
     {
-        $advertiser = Auth::user()->advertiser()->first();
+        $advertiser = Auth::user()->advertiser;
         $offers = $advertiser->offers();
         $offer = $offers->find($id);
 
@@ -86,8 +93,34 @@ class AdvertiserController extends Controller
     }
 
 
-    public function destroy($id)
+    public function editOffer($id)
     {
-        //
+        $offer = Offer::find($id);
+        if($offer->advertiser->id != Auth::user()->advertiser->id) {
+            return redirect('/');
+            //TODO: redirect to 404
+        }
+        $templates = Template::all();
+        return view('tailwind.advertiser.editOffer', ['offer' => $offer,
+                                                    'templates' => $templates]);
+    }
+
+    public function updateOffer($id, Request $request)
+    {
+        $offer = Offer::find($id);
+        if($offer->advertiser->id != Auth::user()->advertiser->id) {
+            return redirect('/');
+            //TODO: redirect to 404
+        }
+
+        $offer->tickets_left = intval($request->tickets_left);
+        $offer->images = '$request->images';
+        $offer->details = $request->details;
+        $offer->campaign_name = $request->campaign_name;
+        $offer->campaign_starts = $request->campaign_starts;
+        $offer->campaign_ends = $request->campaign_ends;
+        $offer->save();
+
+        return back();
     }
 }

@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function upgradePage()
     {
-        return view('test.user.upgrade');
+        return view('tailwind.user.upgrade');
     }
 
     public function upgrade(Request $request)
@@ -45,20 +45,24 @@ class UserController extends Controller
     public function allMyTickets()
     {
         $user = Auth::user();
-        $tickets = $user->tickets()->get();
+        $tickets = $user->tickets;
 
-        dd($tickets);
+        return view('tailwind.user.myTickets', ['tickets' => $tickets]);
     }
 
     public function getThisTicket($qrcode)
     {
+        //TODO: generate whole ticket in server
         $user = Auth::user();
-        $tickets = $user->tickets()->get();
+        $tickets = $user->tickets;
 
         $ticket = $tickets->where('qrcode', $qrcode)->first();
+        if($user->id != $ticket->user->id) {
+            dd(404);
+            //TODO:
+        }
 
-        dd($ticket);
-
+        return view('tailwind.user.thisTicket', ['ticket' => $ticket]);
     }
 
     public function refund($offer_id)
@@ -69,8 +73,8 @@ class UserController extends Controller
     public function purchase($offer_id)
     {
         $offer = Offer::find($offer_id);
-        if($offer->tickets_left == 0) {
-            //return error
+        if($offer->tickets_left == 0 || $offer->is_active != 1) {
+            //TODO: return error
         }
 
         $user = Auth::user();
@@ -90,7 +94,7 @@ class UserController extends Controller
         }else {/*disavtivate the offer*/}
         $offer->save();
 
-        dd($offer);
+        return back();
     }
 
     private function qrcodeGenerate($offer, $user, $place) {

@@ -12,7 +12,7 @@ class AdminController extends Controller
 
     public function addTemplatePage()
     {
-        return view('test.admin.addTemplate');
+        return view('tailwind.admin.addTemplate');
     }
 
     public function addTemplate(Request $request)
@@ -29,15 +29,20 @@ class AdminController extends Controller
     public function listNonVerifiedAdv()
     {
         $advs = Advertiser::where('is_verified', 0)->get();
-        dd($advs);
+        return view('tailwind.admin.advertisers.nonVerifiedAdvertisers', ['advs' => $advs]);
     }
 
+    public function allAdv() {
+        $advs = Advertiser::all();
 
-    public function showAdv($id)
+        return view('tailwind.admin.advertisers.allAdvs', ['advs' => $advs]);
+    }
+
+    public function editAdv($id)
     {
         $adv = Advertiser::find($id);
 
-        return view('test.admin.showAdvertiser',['adv' => $adv]);
+        return view('tailwind.admin.advertisers.editAdvertiser',['adv' => $adv]);
     }
 
 
@@ -47,22 +52,34 @@ class AdminController extends Controller
         $adv->is_verified = 1;
         $adv->save();
 
-        dd($adv);
+        return back();
+    }
+
+    public function unconfirmAdv($id)
+    {
+        $adv = Advertiser::find($id);
+        $adv->is_verified = 0;
+        $adv->save();
+
+        return back();
     }
 
 
     public function listNonVerifiedOffer()
     {
         $offers = Offer::where('is_verified', 0)->get();
-        dd($offers);
+        return view('tailwind.admin.offers.nonVerifiedOffers', ['offers' => $offers]);
+
     }
 
-    public function showOffer($id)
+    public function allOffers()
     {
-        $offer = Offer::find($id);
+        $offers = Offer::all();
 
-        return view('test.admin.showOffer',['offer' => $offer]);
+        return view('tailwind.admin.offers.allOffers',['offers' => $offers]);
     }
+
+
 
 
     public function confirmOffer($id)
@@ -71,8 +88,14 @@ class AdminController extends Controller
         $offer->is_verified = 1;
         $offer->save();
 
-        dd($offer);
+        return back();
+    }
 
+    public function showOffer($id)
+    {
+        $offer = Offer::find($id);
+
+        return view('test.admin.showOffer',['offer' => $offer]);
     }
 
     public function destroy($id)

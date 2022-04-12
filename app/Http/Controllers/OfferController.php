@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Offer;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
@@ -9,14 +10,28 @@ class OfferController extends Controller
     public function search($keyword)
     {
         $result = $keyword;
-        return [
-            'result' => $result,
-        ];
+
+        return view('result');
     }
 
-    public function create()
+    public function index()
     {
-        //
+        $offers = Offer::where('is_active', 1)->get();
+        return view('tailwind.home', ['offers' => $offers]);
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showOffer($id)
+    {
+        $offer = Offer::find($id);
+
+        return view('tailwind.showOffer', ['offer' => $offer]);
     }
 
     /**
@@ -30,16 +45,7 @@ class OfferController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
