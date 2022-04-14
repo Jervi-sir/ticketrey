@@ -13,17 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('advertisers', function (Blueprint $table) {
+        Schema::create('offer_keyword', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-
-            $table->string('company_name');
-            $table->string('phone_number');
-            $table->boolean('is_verified')->default(0);
-
-            $table->string('location')->nullable();
-            $table->text('images')->nullable();
-            $table->longText('details')->nullable();
+            $table->foreignId('offer_id')->constrained();
+            $table->foreignId('keyword_id')->constrained();
 
             $table->timestamps();
         });
@@ -36,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('advertisers');
+        Schema::dropIfExists('offer_keyword');
     }
 };

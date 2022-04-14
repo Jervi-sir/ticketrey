@@ -17,14 +17,23 @@ return new class extends Migration
             $table->id();
             $table->foreignId('advertiser_id')->constrained();
             $table->foreignId('template_id')->constrained();
+
             $table->boolean('is_verified')->default(0);
             $table->boolean('is_active')->default(0);
-            $table->bigInteger('tickets_left');
-            $table->longText('images');
-            $table->longText('details');
+
             $table->string('campaign_name');
             $table->date('campaign_starts');
             $table->date('campaign_ends');
+
+            $table->bigInteger('tickets_left');
+            $table->string('location');
+            $table->string('price');
+
+            $table->bigInteger('nb_visited')->default(0);
+            $table->bigInteger('votes')->default(0);
+
+            $table->text('images');
+            $table->longText('details');
             $table->timestamps();
 
             //TODO:add total tickets

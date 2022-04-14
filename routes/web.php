@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/', [OfferController::class, 'index'])->name('home');                                                                   //[done]
 Route::get('show/{id}', [OfferController::class, 'showOffer'])->name('showOffer');                                                  //[done]
-Route::get('search&=', [OfferController::class, 'search'])->name('search');                                                //[]
+Route::get('search&=', [OfferController::class, 'search'])->name('search');                                                         //[]
 
 Route::get('/joinAdv', [AdvertiserController::class, 'joinAdvertiserPage'])->name('get.advertiser.join');                           //[done]
 Route::post('/joinAdv', [AdvertiserController::class, 'joinAdvertiser'])->name('post.advertiser.join');                             //[done]
@@ -54,7 +54,7 @@ Route::get('/getThisTicket/{qrcode}', [UserController::class, 'getThisTicket'])-
 
 Route::post('/refund&={offer_id}', [UserController::class, 'refund'])->name('user.refund');                                         //[]
 //TODO: change below to post
-Route::post('/purchase&={offer_id}', [UserController::class, 'purchase'])->name('user.purchase');                                    //[done]
+Route::post('/purchase&={offer_id}', [UserController::class, 'purchase'])->name('user.purchase');                                   //[done]
 
 //------------------ Admin ------------------//
 Route::middleware(['auth', 'isAdmin'])->group(function() {

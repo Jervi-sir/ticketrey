@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Keyword;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Offer extends Model
 {
@@ -19,5 +20,9 @@ class Offer extends Model
 
     public function tickets() {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function keywords() {
+        return $this->belongsToMany(Keyword::class, 'offer_keyword');
     }
 }
