@@ -32,7 +32,6 @@ class AdminController extends Controller
         $template->source_code = $request->source_code;
         $template->save();
         dd($template);
-
     }
 
     /*--------------------------------------------------------

@@ -20,15 +20,15 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $role = new RoleSeeder();
-        $user = new UserSeeder();
+        //$user = new UserSeeder();
 
-        $advertiser = new AdvertiserSeeder();
-        $template = new TemplateSeeder();
+        //$advertiser = new AdvertiserSeeder();
+        //$template = new TemplateSeeder();
 
         $role->run();
-        $user->run();
-        $advertiser->run();
-        $template->run();
+        //$user->run();
+        //$advertiser->run();
+        //$template->run();
 
     }
 }

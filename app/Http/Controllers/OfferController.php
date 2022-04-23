@@ -29,7 +29,6 @@ class OfferController extends Controller
     {
         $offers = Offer::where('is_active', 1)->get();
         return view('tailwind.home', ['offers' => $offers]);
-
     }
 
 
@@ -42,6 +41,4 @@ class OfferController extends Controller
 
         return view('tailwind.showOffer', ['offer' => $offer]);
     }
-
-
 }
