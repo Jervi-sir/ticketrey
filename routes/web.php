@@ -26,6 +26,7 @@ Route::get('/dashboard', function () {
 
 //Advertisers
 //become an advertise, post a request
+Route::get('/becomeAdvertiser', [AdvertiserConctroller::class, 'becomePage'])->name('advertiser.requestPage');
 Route::post('/becomeAdvertiser', [AdvertiserConctroller::class, 'become'])->name('advertiser.request');
 //add an offer
 Route::post('/advertiser/addOffer', [AdvertiserConctroller::class, 'addOffer'])->name('advertiser.addOffer');
@@ -42,7 +43,7 @@ Route::post('/advertiser/deleteOffer', [AdvertiserConctroller::class, 'deleteOff
 //upgrade to advertiser
 Route::post('/upgradeToAdvertiser', [UserController::class, 'upgrade'])->name('user.upgrade');
 //searc
-Route::get('/search', [UserController::class, 'search'])->name('user.search');
+Route::get('/search', [UserController::class, 'search'])->name('search');
 //purchase ticket
 Route::post('/purchase', [UserController::class, 'purchase'])->name('user.purchase');
 //request for a refund

@@ -11,20 +11,20 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     public function register(Request $request) {
-        $role_client = Role::where('name', 'client')->first();
-
         $fields = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed',
         ]);
 
-        $user = User::create([
-            'role_id' => $role_client->id,
-            'name' => $fields['name'],
-            'email' => $fields['email'],
-            'password' => bcrypt($fields['password']),
-        ]);
+        $role_client = Role::where('name', 'client')->first();
+        $user = new User();
+        $user->role_id = $role_client;
+        $user->name = $fields['$name'];
+        $user->email = $fields['$email'];
+        $user->password = bcrypt($fields['$password']);
+        $user->details = $fields['$details'];
+        $user->save();
 
         $token = $user->createToken($fields['email'])->plainTextToken;
 
@@ -35,6 +35,7 @@ class AuthController extends Controller
 
         return response($response, 201);
     }
+
 
     public function login(Request $request) {
         $fields = $request->validate([

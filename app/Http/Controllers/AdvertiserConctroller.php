@@ -12,11 +12,13 @@ use Illuminate\Support\Facades\Hash;
 
 class AdvertiserConctroller extends Controller
 {
+    public function becomePage(Request $request) {
+        return view('test.advertiser.become');
+    }
     //request a registery as an Advertiser
     public function become(Request $request) {
         //* [name, email, password, userdetails]
         //* [companyName, companyDetails, images, phone_number]
-
 
         $fields = $request->validate([
             'name' => 'required|string',
@@ -43,6 +45,8 @@ class AdvertiserConctroller extends Controller
                     'message' => 'Bad creds'
                 ], 401);
             }
+
+            $user->role_id = Role::where('name', 'advertiser')->first()->id;
         }
         //Doesnt exist
         else {
@@ -95,6 +99,7 @@ class AdvertiserConctroller extends Controller
     }
 
     public function manageOffers(Request $request) {
+
         $offers = Auth::user()->advertiser()->first()->offers()->get();
 
         return [
